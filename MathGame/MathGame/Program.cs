@@ -3,10 +3,8 @@
 using System.Data;
 using System.Diagnostics;
 
-
 Random roll = new Random();
 List<GameResult> gameHistory = new List<GameResult>();
-
 
 int gameNumber = 0;
 int numberRange = 11;
@@ -17,7 +15,6 @@ string elapsedTime;
 
 Stopwatch sw;
 
-
 DifficultyLevel(out numberRange, out numberOfQuestions);
 
 int a = GenerateNumber();
@@ -26,7 +23,6 @@ int b = GenerateNumber();
 TrackTime(out sw);
 PickOperator(numberOfQuestions, a, b);
 ShowScore(sw, numberOfQuestions, correctAnswer);
-
 
 int GenerateNumber()
 {
@@ -40,15 +36,14 @@ void CheckAnswer(int result)
     {
         Console.WriteLine("You got it right!");
         correctAnswer++;
-
     }
+
     else
         Console.WriteLine("Wrong!");
 }
 
 void PickOperator(int numberOfQuestions, int a, int b)
 {
-
     string? input;
 
     while (true)
@@ -70,13 +65,11 @@ void PickOperator(int numberOfQuestions, int a, int b)
             for (int i = 0; i < numberOfQuestions; i++)
             {
                 int result = a + b;
-
                 Console.WriteLine($"What is the result of: {a} + {b}?");
                 CheckAnswer(result);
 
                 a = GenerateNumber();
                 b = GenerateNumber();
-
             }
             break;
 
@@ -127,7 +120,6 @@ void PickOperator(int numberOfQuestions, int a, int b)
 
             for (int i = 0; i < numberOfQuestions; i++)
             {
-
                 string randomOp = roll.Next(1, 5).ToString();
                 switch (randomOp)
                 {
@@ -185,19 +177,18 @@ void PickOperator(int numberOfQuestions, int a, int b)
             }
 
             break;
-
     }
 }
 
 void ShowScore(in Stopwatch sw, int numberOfQuestions, int correctAnswer)
 {
-    //bool isGameOver = true;
     sw.Stop();
     TimeSpan ts = sw.Elapsed;
 
     gameNumber++;
     elapsedTime = String.Format("{0:00}:{1:00}:{2:00}",
     ts.Hours, ts.Minutes, ts.Seconds);
+    
     Console.WriteLine($"Congratulations! You finished with {correctAnswer} of {numberOfQuestions} answers correct!");
     Console.WriteLine($"It took you a total time of: {elapsedTime}");
     Console.WriteLine("Show game history? Y/N");
@@ -205,7 +196,6 @@ void ShowScore(in Stopwatch sw, int numberOfQuestions, int correctAnswer)
 
     while (true)
     {
-
         string? gameHistoryInput = Console.ReadLine();
 
         if (!string.IsNullOrEmpty(gameHistoryInput))
@@ -228,12 +218,8 @@ void ShowScore(in Stopwatch sw, int numberOfQuestions, int correctAnswer)
             }
 
             Console.WriteLine("Error: Not valid!");
-
-
         }
     }
-    //PlayAgain();
-
 }
 
 void DifficultyLevel(out int numberRange, out int numberOfQuestions)
@@ -241,64 +227,45 @@ void DifficultyLevel(out int numberRange, out int numberOfQuestions)
     string? input;
     numberRange = 11;
     numberOfQuestions = 5;
+
     while (true)
     {
-
         Console.WriteLine("Pick a difficulty: 1) Easy\t2) Medium\t3) Hard\t\t4) Very Hard");
         input = Console.ReadLine();
         if (input == "1" || input == "2" || input == "3" || input == "4")
             break;
 
         Console.WriteLine("Error: Not valid!");
-
-
     }
+
     switch (input)
     {
         case "1":
-
             numberRange = 11;
             numberOfQuestions = 5;
             break;
 
-
         case "2":
-
             numberRange = 26;
             numberOfQuestions = 5;
             break;
 
         case "3":
-
             numberRange = 101;
             numberOfQuestions = 10;
             break;
 
         case "4":
-
             numberRange = 251;
             numberOfQuestions = 15;
             break;
-
-
     }
-
-
-
-
-
-
-
-    //changes how hard or easy the game is
 }
 
 void TrackTime(out Stopwatch sw)
 {
     sw = new Stopwatch();
-
     sw.Start();
-
-
 }
 
 void PlayAgain()
@@ -319,7 +286,6 @@ void PlayAgain()
 
                 DifficultyLevel(out numberRange, out numberOfQuestions);
 
-
                 int a = GenerateNumber();
                 int b = GenerateNumber();
 
@@ -327,8 +293,6 @@ void PlayAgain()
                 PickOperator(numberOfQuestions, a, b);
                 ShowScore(sw, numberOfQuestions, correctAnswer);
                 return;
-
-
             }
 
             else if (c.ToString().ToUpper() == "N")
@@ -339,7 +303,6 @@ void PlayAgain()
 
         Console.WriteLine("Error: Not valid!");
     }
-
 }
 
 void SaveGameResult()
@@ -371,6 +334,5 @@ public class GameResult
     public int CorrectAnswers { get; set; }
     public int TotalQuestions { get; set; }
     public string? ElapsedTime { get; set; }
-
 }
 
