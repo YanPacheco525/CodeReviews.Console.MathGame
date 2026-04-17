@@ -188,7 +188,7 @@ void ShowScore(in Stopwatch sw, int numberOfQuestions, int correctAnswer)
     gameNumber++;
     elapsedTime = String.Format("{0:00}:{1:00}:{2:00}",
     ts.Hours, ts.Minutes, ts.Seconds);
-    
+
     Console.WriteLine($"Congratulations! You finished with {correctAnswer} of {numberOfQuestions} answers correct!");
     Console.WriteLine($"It took you a total time of: {elapsedTime}");
     Console.WriteLine("Show game history? Y/N");
@@ -230,35 +230,47 @@ void DifficultyLevel(out int numberRange, out int numberOfQuestions)
 
     while (true)
     {
-        Console.WriteLine("Pick a difficulty: 1) Easy\t2) Medium\t3) Hard\t\t4) Very Hard");
+        Console.WriteLine("Pick a difficulty: 1) Easy\t2) Medium\t3) Hard\t\t4) Very Hard\t5) View Game History");
         input = Console.ReadLine();
-        if (input == "1" || input == "2" || input == "3" || input == "4")
-            break;
 
-        Console.WriteLine("Error: Not valid!");
-    }
+        if (input != "1" && input != "2" && input != "3" && input != "4" && input != "5")
+        {
+            Console.WriteLine("Error: Not valid!");
+            continue;
+        }
 
-    switch (input)
-    {
-        case "1":
-            numberRange = 11;
-            numberOfQuestions = 5;
-            break;
+        switch (input)
+        {
+            case "1":
+                numberRange = 11;
+                numberOfQuestions = 5;
+                return;
 
-        case "2":
-            numberRange = 26;
-            numberOfQuestions = 5;
-            break;
+            case "2":
+                numberRange = 26;
+                numberOfQuestions = 5;
+                return;
 
-        case "3":
-            numberRange = 101;
-            numberOfQuestions = 10;
-            break;
+            case "3":
+                numberRange = 101;
+                numberOfQuestions = 10;
+                return;
 
-        case "4":
-            numberRange = 251;
-            numberOfQuestions = 15;
-            break;
+            case "4":
+                numberRange = 251;
+                numberOfQuestions = 15;
+                return;
+
+            case "5":
+                if (gameNumber == 0)
+                {
+                    Console.WriteLine("No game history found! Play a game first!");
+                    continue;
+                }
+
+                GameHistory();
+                continue;
+        }
     }
 }
 
