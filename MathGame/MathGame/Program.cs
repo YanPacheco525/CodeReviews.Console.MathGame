@@ -76,7 +76,7 @@ void PickOperator(int numberOfQuestions, int a, int b)
         case "2":
             for (int i = 0; i < numberOfQuestions; i++)
             {
-                int result = Math.Abs(a - b);
+                int result = a - b;
                 Console.WriteLine($"What is the result of: {a} - {b}?");
                 CheckAnswer(result);
 
@@ -136,7 +136,7 @@ void PickOperator(int numberOfQuestions, int a, int b)
 
                     case "2":
                         {
-                            int result = Math.Abs(a - b);
+                            int result = a - b;
                             Console.WriteLine($"What is the result of: {a} - {b}?");
                             CheckAnswer(result);
 
